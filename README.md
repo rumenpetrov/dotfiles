@@ -1,0 +1,2 @@
+# dotfiles
+Automation bash script.
