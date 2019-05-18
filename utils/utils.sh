@@ -15,7 +15,7 @@ function log_task() {
 # Description: Custom subtask log.
 #
 function log_subtask() {
-  echo "✳️ $1"
+  echo "✳️  $1"
 }
 
 #
@@ -23,7 +23,7 @@ function log_subtask() {
 # Description: Log subtask that is completed.
 #
 function log_subtask_success() {
-  echo "$SPACER✔ Completed."
+  echo "$SPACER✔ Completed * $1"
 }
 
 #
@@ -39,55 +39,60 @@ function log_subtask_info() {
 # Description: Log subtask that is failed.
 #
 function log_subtask_error() {
-  echo "$SPACER✘ Failed."
+  echo "$SPACER✘ Failed * $1"
 }
 
 #
-# Usage: backup <path> <filename>
+# Usage: backup <filename>
 # Description: Check if the file exists and backup it.
 #
 function backup() {
-  path_source=$1
-  filename=$2
+  filename=$1
+  path_source="$HOME/$1"
   path_destination="$path_source.backup.$(date +%d-%m-%Y-%H-%M)"
 
-  log_subtask "Backup $filename"
+  log_subtask "Backup file $filename"
 
   # Does the file already exist?
   if [ -e "$path_source" ]
     then
-
-      # As a pure file?
+      # Is it a symlink?
       if [ ! -L "$path_source" ]
         then
           mv "$path_source" $path_destination
-          log_subtask_info "Moved your old $path_source file to $path_destination"
-          log_subtask_success
+          log_subtask_success "Moved your old $path_source file to $path_destination"
         else
-          log_subtask_info "There is not file named ${filename##*/} in your home directory."
-          log_subtask_error
+          log_subtask_info "Delete file ${filename##*/}, because it exists as a symlink in your home directory."
+          rm -rf $path_source
       fi
     else
-      log_subtask_info "There is not file named ${filename##*/} in your home directory."
-      log_subtask_error
+      log_subtask_info "Skipping * There is not file named ${filename##*/} in your home directory."
   fi
 }
 
 #
-# Usage: symlink <path> <filename>
-# Description: Check if the file exists and make a symlink to it.
+# Usage: symlink <file_name>
+# Description: Check if the file exists and replace it with a symlink.
 #
 function symlink() {
-  path_source=$1
-  filename=$2
+  file_name=$1
+  path_source="$HOME/dotfiles/files/$1"
+  path_destination="$HOME/$1"
+
+  log_subtask "Symlinking file $file_name"
 
   # Does the file already exist?
-  if [ ! -e "$path_source" ]; then
-    # As a pure file?
-    if [ ! -L "$path_source" ]; then
-      log_subtask "Symlinking $filename"
-      printf "    "
-      ln -s "$PWD/$filename" "$path_source"
-    fi
+  if [ ! -e "$path_destination" ]
+    then
+      # Is it a symlink?
+      if [ ! -L "$path_destination" ]
+        then
+          log_subtask_success
+          ln -s $path_source $path_destination
+        else
+          log_subtask_info "Skipping * The file is symlink!"
+      fi
+    else
+      log_subtask_info "Skipping * The file already exists!"
   fi
 }
