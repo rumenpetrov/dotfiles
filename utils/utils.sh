@@ -43,15 +43,15 @@ function log_subtask_error() {
 }
 
 #
-# Usage: backup <filename>
+# Usage: backup <file_name>
 # Description: Check if the file exists and backup it.
 #
 function backup() {
-  filename=$1
+  file_name=$1
   path_source="$HOME/$1"
   path_destination="$path_source.backup.$(date +%d-%m-%Y-%H-%M)"
 
-  log_subtask "Backup file $filename"
+  log_subtask "Backup file $file_name"
 
   # Does the file already exist?
   if [ -e "$path_source" ]
@@ -62,11 +62,11 @@ function backup() {
           mv "$path_source" $path_destination
           log_subtask_success "Moved your old $path_source file to $path_destination"
         else
-          log_subtask_info "Delete file ${filename##*/}, because it exists as a symlink in your home directory."
+          log_subtask_info "Delete file ${file_name##*/}, because it exists as a symlink in your home directory."
           rm -rf $path_source
       fi
     else
-      log_subtask_info "Skipping * There is not file named ${filename##*/} in your home directory."
+      log_subtask_info "Skipping * There is not file named ${file_name##*/} in your home directory."
   fi
 }
 
