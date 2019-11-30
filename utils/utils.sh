@@ -45,11 +45,12 @@ function log_subtask_error() {
 #
 # Usage: backup <file_name>
 # Description: Check if the file exists and backup it.
+# IMPORTANT: Backup only real files, NOT symlinks
 #
 function backup() {
   file_name=$1
   path_source="$HOME/$1"
-  path_destination="$path_source.backup.$(date +%d-%m-%Y-%H-%M)"
+  path_destination="$path_source.backup.$(date +%d-%m-%Y--%H-%M-%S)"
 
   log_subtask "Backup file $file_name"
 
