@@ -1,8 +1,6 @@
 # dotfiles
 Automation bash script.
 
-Based on Fedora 31.
-
 ### Setup
  - Clone the repo in you "Home" directory.
  - Navigate to dotfiles folder.
@@ -10,3 +8,8 @@ Based on Fedora 31.
 ```sh
 $ . run.sh
 ```
+
+#### Tasks
+- Configures shell files
+- Configures git
+- Configures window manager
