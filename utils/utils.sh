@@ -49,7 +49,7 @@ function log_subtask_error() {
 #
 function backup() {
   file_name=$1
-  path_source="$HOME/$1"
+  path_source=$2
   path_destination="$path_source.backup.$(date +%d-%m-%Y--%H-%M-%S)"
 
   log_subtask "Backup file $file_name"
@@ -75,15 +75,41 @@ function backup() {
 # Usage: symlink <file_name>
 # Description: Check if the file exists and replace it with a symlink.
 #
-function symlink() {
+function symlinkByName() {
   file_name=$1
-  path_source="$HOME/dotfiles/files/$1"
-  path_destination="$HOME/$1"
+  path_source=$2
+  path_destination=$3
 
   log_subtask "Symlinking file $file_name"
 
   # Does the file already exist?
   if [ ! -e "$path_destination" ]
+    then
+      # Is it a symlink?
+      if [ ! -L "$path_destination" ]
+        then
+          log_subtask_success
+          ln -s $path_source $path_destination
+        else
+          log_subtask_info "Skipping * The file is symlink!"
+      fi
+    else
+      log_subtask_info "Skipping * The file already exists!"
+  fi
+}
+
+#
+# Usage: symlink <path_to_source, path_to_destination>
+# Description: Check if the file exists and replace it with a symlink.
+#
+function symlink() {
+  path_source=$1
+  path_destination=$2
+
+  log_subtask "Create symlink"
+
+  # Does the file already exist?
+  if [ ! -f "$path_destination" ]
     then
       # Is it a symlink?
       if [ ! -L "$path_destination" ]
