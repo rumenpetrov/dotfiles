@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Import utility functions
-source ./utils/utils.sh
+source $HOME/dotfiles/utils/utils.sh
 
 echo -n "Do you want to proceed? [y/n]: "
 read -r wizard_start
@@ -54,12 +54,12 @@ fi
 
 if [[ $wizard_git == "y" ]] || [[ $wizard_git == "Y" ]]; then
   log_task "Setup git"
-  source ./tasks/git-setup.sh
+  source $HOME/dotfiles/tasks/git-setup.sh
 fi
 
 if [[ $wizard_wm == "y" ]] || [[ $wizard_wm == "Y" ]]; then
   log_task "Setup window manager"
-  source ./tasks/setup-window-manager.sh
+  source $HOME/dotfiles/tasks/setup-window-manager.sh
 fi
 
 echo "👌 Awesome, all set."
