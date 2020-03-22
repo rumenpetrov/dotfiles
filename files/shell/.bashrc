@@ -9,6 +9,11 @@ case $- in
 esac
 # .bashrc
 
+# Connect to and initalize gnome-keyring-daemon when in sway session
+if [ "$DESKTOP_SESSION" = "sway" ]; then
+    export $(gnome-keyring-daemon --start)
+fi
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
