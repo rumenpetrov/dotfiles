@@ -12,6 +12,7 @@ echo "- slurp"
 echo "- wl-clipboard"
 echo "- wofi"
 echo "- light"
+echo "- dunst"
 echo -n "Do you want to continue? [y/n]: "
 read -r confirmInstall
 
