@@ -1,0 +1,1 @@
+/home/rumen/os-bootstrap/files/shell/.bashrc
