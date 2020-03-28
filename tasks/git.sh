@@ -7,7 +7,7 @@ function install_dependencies() {
 }
 
 function setup_git {
-  local path_to_config_file="~/.gitconfig"
+  local path_to_config_file="$HOME/.gitconfig"
 
   if [[ ! -f "$(which git)" ]]; then
     echo "git is not found on you system. You have to install it in order to continue?"

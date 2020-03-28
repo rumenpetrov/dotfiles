@@ -7,7 +7,7 @@ function install_dependencies() {
 }
 
 function setup_WM() {
-  local path_to_actual_config_dir="~/.config"
+  local path_to_actual_config_dir="$HOME/.config"
   local path_to_input_config_dir=$2
 
   echo "The script will install the following packages: "
