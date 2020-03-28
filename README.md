@@ -1,12 +1,14 @@
 # dotfiles
-Automation bash script.
+Automation shell scripts.
 
 ### Setup
  - Clone the repo in you "Home" directory.
  - Navigate to dotfiles folder.
  - Run the script
 ```sh
-$ . run.sh
+$ cd dotfiles/
+$ chmod -x run.sh
+$ ./run.sh
 ```
 
 #### Tasks
