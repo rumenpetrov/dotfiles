@@ -23,7 +23,8 @@ function log_subtask() {
 # Description: Log subtask that is completed.
 #
 function log_subtask_success() {
-  echo "$SPACER✔ Completed * $1"
+  MSG="${1:""}"
+  echo "$SPACER✔ Completed * $MSG"
 }
 
 #
@@ -55,10 +56,10 @@ function backup() {
   log_subtask "Backup file $file_name"
 
   # Does the file already exist?
-  if [ -e "$path_source" ]
+  if [[ -f $path_source ]]
     then
       # Is it a symlink?
-      if [ ! -L "$path_source" ]
+      if [[ ! -L $path_source ]]
         then
           mv "$path_source" $path_destination
           log_subtask_success "Moved your old $path_source file to $path_destination"
@@ -83,15 +84,15 @@ function symlinkByName() {
   log_subtask "Symlinking file $file_name"
 
   # Does the file already exist?
-  if [ ! -e "$path_destination" ]
+  if [[ ! -f $path_destination ]]
     then
       # Is it a symlink?
-      if [ ! -L "$path_destination" ]
+      if [[ ! -L $path_destination ]]
         then
           log_subtask_success
           ln -s $path_source $path_destination
         else
-          log_subtask_info "Skipping * The file is symlink!"
+          log_subtask_info "Skipping * The file is a symlink!"
       fi
     else
       log_subtask_info "Skipping * The file already exists!"
@@ -109,15 +110,15 @@ function symlink() {
   log_subtask "Create symlink"
 
   # Does the file already exist?
-  if [ ! -f "$path_destination" ]
+  if [[ ! -f $path_destination ]]
     then
       # Is it a symlink?
-      if [ ! -L "$path_destination" ]
+      if [[ ! -L $path_destination ]]
         then
           log_subtask_success
           ln -s $path_source $path_destination
         else
-          log_subtask_info "Skipping * The file is symlink!"
+          log_subtask_info "Skipping * The file is a symlink!"
       fi
     else
       log_subtask_info "Skipping * The file already exists!"

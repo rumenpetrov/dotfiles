@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo ""
+# This script is part of the main script and it depends on it
 
 echo "The script will install the following packages: "
 echo "- sway"
@@ -13,12 +13,15 @@ echo "- wl-clipboard"
 echo "- wofi"
 echo "- light"
 echo "- dunst"
-echo -n "Do you want to continue? [y/n]: "
-read -r confirmInstall
+echo ""
 
-if [[ $confirmInstall != "y" ]] && [[ $confirmInstall != "Y" ]]; then
-  exit 0
-fi
+echo "Do you want to continue?"
+select CHOICE_RUN in "Yes" "No"; do
+    case $CHOICE_RUN in
+        Yes ) break;;
+        No ) return 0;;
+    esac
+done
 
 sudo dnf install sway swayidle swaylock waybar grim slurp wl-clipboard wofi light
 
