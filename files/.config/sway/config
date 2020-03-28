@@ -297,6 +297,12 @@ bindsym XF86AudioMute exec amixer sset Master toggle && pkill -RTMIN+1 i3blocksi
 # Reload audio devices command
 # pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
 
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 #
 # Screen brightness
 #

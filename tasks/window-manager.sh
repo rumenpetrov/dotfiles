@@ -3,7 +3,7 @@
 # This is part of the main script and it depends on it
 
 function install_dependencies() {
-  sudo dnf install sway swayidle swaylock waybar pavucontrol grim slurp wl-clipboard wofi light
+  sudo dnf install sway swayidle swaylock waybar pavucontrol blueman grim slurp wl-clipboard playerctl wofi light
 }
 
 function setup_WM() {
@@ -16,9 +16,11 @@ function setup_WM() {
   echo "- swaylock"
   echo "- waybar"
   echo "- pavucontrol"
+  echo "- blueman"
   echo "- grim"
   echo "- slurp"
   echo "- wl-clipboard"
+  echo "- playerctl"
   echo "- wofi"
   echo "- light"
   echo "- dunst"
