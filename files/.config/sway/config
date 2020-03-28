@@ -223,12 +223,12 @@ gaps inner 6
 #
 # Configure monitor placement
 #
-set $monitorLeft DP-3
-set $monitorCenter eDP-1
+set $monitorTop DP-3
+set $monitorInternal eDP-1
 set $monitorRight DP-4
-output DP-3 pos 0 0
-output $monitorCenter pos 1920 0
-output DP-4 pos 3840 -840 transform "90"
+output $monitorInternal pos 0 0
+output $monitorTop pos 0 -1080
+output $monitorRight pos 1920 -840 transform "90"
 
 #
 # Screenshots

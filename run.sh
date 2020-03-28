@@ -54,11 +54,9 @@ function backup() {
   log_subtask "Backup file $file_name"
 
   # Does the file already exist?
-  if [[ -f $path_source ]]
-    then
+  if [[ -f $path_source ]]; then
       # Is it a symlink?
-      if [[ ! -L $path_source ]]
-        then
+      if [[ ! -L $path_source ]]; then
           mv "$path_source" $path_destination
           log_subtask_success "Moved your old $path_source file to $path_destination"
         else
@@ -66,7 +64,7 @@ function backup() {
           rm -rf $path_source
       fi
     else
-      log_subtask_info "Skipping * There is not file named ${file_name##*/} in your home directory."
+      log_subtask_info "Skipping * There is not file named ${file_name##*/} in the directory. $path_source"
   fi
 }
 
@@ -80,11 +78,9 @@ function symlinkByName() {
   log_subtask "Symlinking file $file_name"
 
   # Does the file already exist?
-  if [[ ! -f $path_destination ]]
-    then
+  if [[ ! -f $path_destination ]]; then
       # Is it a symlink?
-      if [[ ! -L $path_destination ]]
-        then
+      if [[ ! -L $path_destination ]]; then
           log_subtask_success
           ln -s $path_source $path_destination
         else
@@ -101,18 +97,21 @@ function symlink() {
   local path_source=$1
   local path_destination=$2
 
+  echo "11 $path_source"
+  echo "22 $path_destination"
+
   log_subtask "Create symlink"
 
   # Does the file already exist?
-  if [[ ! -f $path_destination ]]
-    then
+  if [[ ! -f $path_destination ]]; then
       # Is it a symlink?
-      if [[ ! -L $path_destination ]]
-        then
+      if [[ ! -L $path_destination ]]; then
           log_subtask_success
           ln -s $path_source $path_destination
         else
-          log_subtask_info "Skipping * The file is a symlink!"
+          log_subtask_info "Rebuild * The file is a symlink!"
+          rm -rf $path_destination
+          ln -s $path_source $path_destination
       fi
     else
       log_subtask_info "Skipping * The file already exists!"
