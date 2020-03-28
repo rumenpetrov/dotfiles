@@ -7,7 +7,7 @@ echo -n "Do you want to proceed? [y/n]: "
 read -r wizard_start
 
 if [[ $wizard_start != "y" ]] && [[ $wizard_start != "Y" ]]; then
-  return 0
+  exit 0
 fi
 
 echo -n "Do you want to modify the files from your home folder? [y/n]: "

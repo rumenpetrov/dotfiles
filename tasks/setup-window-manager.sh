@@ -17,7 +17,7 @@ echo -n "Do you want to continue? [y/n]: "
 read -r confirmInstall
 
 if [[ $confirmInstall != "y" ]] && [[ $confirmInstall != "Y" ]]; then
-  return 0;
+  exit 0
 fi
 
 sudo dnf install sway swayidle swaylock waybar grim slurp wl-clipboard wofi light
