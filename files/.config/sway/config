@@ -216,9 +216,32 @@ bar {
 #
 # Personalization
 #
-default_border pixel
+set $color_bg #222222
+set $color_bg_contrast #00ff00
+set $color_active #444444
+set $color_active_contrast #ffffff
+set $color_success #00ff00
+set $color_success_contrast #ffffff
+set $color_error #ff0000
+set $color_error_contrast #ffffff
+set $color_warning #ffa500
+set $color_warning_contrast #ffffff
 
-gaps inner 6
+default_border pixel 3
+default_floating_border none
+
+# class
+# border
+# backgr.
+# text
+# indicator
+# child_border
+client.focused $color_bg $color_bg $color_bg_contrast $color_active $color_bg_contrast
+client.unfocused $color_active $color_active $color_active_contrast $color_active $color_active
+client.urgent $color_warning $color_warning $color_warning_contrast $color_active $color_bg_contrast
+client.background $color_bg
+
+gaps inner 4
 smart_gaps on
 
 focus_follows_mouse no
@@ -245,7 +268,7 @@ bindcode Shift+$keyCodePrintScreen exec grim -g "$(slurp)" - | wl-copy
 #
 # Notifications
 #
-exec dunst
+exec mako
 
 #
 # Start firefox in wayland mode
