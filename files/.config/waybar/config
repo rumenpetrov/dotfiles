@@ -163,12 +163,13 @@
   // - Fix update bug
   // - Shorten the text
   "custom/keyboard-layout": {
-    "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
-    // Interval set only as a fallback, as the value is updated by signal
-    "interval": 30,
+    // "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name'",
     "format": "  {}", // Icon: keyboard
+    "exec": "$HOME/os-bootstrap/scripts/sway-keyboard-layout.sh",
+    // Interval set only as a fallback, as the value is updated by signal
+    "interval": 3,
     // Signal sent by Sway key binding (~/.config/sway/key-bindings)
-    "signal": 1, // SIGHUP
+    "signal": 1,
     "tooltip": false
   }
 }
