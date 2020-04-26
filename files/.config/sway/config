@@ -268,7 +268,7 @@ bindcode Shift+$keyCodePrintScreen exec grim -g "$(slurp)" - | wl-copy
 #
 # Notifications
 #
-exec mako
+exec mako --anchor=top-center --background-color=$color_bg --text-color=$color_bg_contrast --border-color=$color_bg_contrast --default-timeout=5000 --icons=1
 
 #
 # Start firefox in wayland mode
@@ -312,8 +312,8 @@ input type:mouse {
 #
 # Audio
 #
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks; exec notify-send "Volume up"
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks; exec notify-send "Volume down"
 bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
 bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer sset Master toggle && pkill -RTMIN+1 i3blocksi
