@@ -1,3 +1,9 @@
+#
+# Refs:
+# https://github.com/Robinhuett/dotfiles/blob/master/.config/sway/config
+# https://github.com/luispabon/sway-dotfiles/blob/master/configs/sway/config
+#
+
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -262,8 +268,8 @@ output $monitorRight pos 1920 -840 transform "90"
 # Screenshots
 #
 set $keyCodePrintScreen 107
-bindcode $keyCodePrintScreen exec grim $(xdg-user-dir PICTURES)/$(date +'%s_grim.png')
-bindcode Shift+$keyCodePrintScreen exec grim -g "$(slurp)" - | wl-copy
+bindcode $keyCodePrintScreen exec grim $(xdg-user-dir PICTURES)/$(date +'%s_grim.png') && exec notify-send "New screenshot" "Check the content of the HOME/Pictures folder"
+bindcode Shift+$keyCodePrintScreen exec grim -g "$(slurp)" - | wl-copy && exec notify-send "New screenshot" "Copied in the clipboard"
 
 #
 # Notifications
@@ -321,15 +327,15 @@ bindsym XF86AudioMute exec amixer sset Master toggle && pkill -RTMIN+1 i3blocksi
 # pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play; exec notify-send "Play"
+bindsym XF86AudioPause exec playerctl pause; exec notify-send "Pause"
+bindsym XF86AudioNext exec playerctl next; exec notify-send "Next song"
+bindsym XF86AudioPrev exec playerctl previous; exec notify-send "Previous song"
 
 #
 # Screen brightness
 #
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5; exec notify-send "Screen brightness up"
+bindsym XF86MonBrightnessDown exec light -U 5; exec notify-send "Screen brightness down"
 
 include /etc/sway/config.d/*
