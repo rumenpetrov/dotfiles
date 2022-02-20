@@ -4,25 +4,25 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+  *i*) ;;
+    *) return;;
 esac
 # .bashrc
 
 # Connect to and initalize gnome-keyring-daemon when in sway session
 if [ "$DESKTOP_SESSION" = "sway" ]; then
-    export $(gnome-keyring-daemon --start)
+  export $(gnome-keyring-daemon --start)
 fi
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -30,6 +30,13 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
+fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -37,7 +44,7 @@ export PATH
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 #
@@ -46,14 +53,14 @@ fi
 # export PS1='[\u@\h \W]\$'
 #
 function setPrompt {
-    local __user_and_host="\[\033[01;32m\]\u@\h"
-    local __cur_location="\[\033[01;34m\]\w"
-    local __git_branch_color="\[\033[31m\]"
-    #local __git_branch="\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`"
-    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
-    local __prompt_tail="\[\033[35m\]$"
-    local __last_color="\[\033[00m\]"
-    export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__prompt_tail$__last_color "
+  local __user_and_host="\[\033[01;32m\]\u@\h"
+  local __cur_location="\[\033[01;34m\][\w]"
+  local __git_branch_color="\[\033[31m\]"
+  #local __git_branch="\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`"
+  local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+  local __prompt_tail="\[\033[35m\]$"
+  local __last_color="\[\033[00m\]"
+  export PS1="\t $__cur_location $__git_branch_color$__git_branch \n$__user_and_host $__prompt_tail$__last_color "
 }
 
 setPrompt

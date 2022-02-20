@@ -1,10 +1,14 @@
+# General
 alias c="clear"
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll="ls -alF"
+alias sz="du -had 1 | sort -rh"
+alias disks="df -hT"
 
-alias www='cd ~/storage/dev/www'
-alias disks='df -hT'
+# Location
+alias storage="cd ~/storage"
+alias projects="cd ~/storage/projects"
+alias www="cd ~/storage/projects/web"
 
-alias smb-tunnel="sudo ssh -N rumen@78.83.67.145 -p 2222 -L 139:localhost:139"
-alias plex-tunnel="sudo ssh -L 32400:192.168.0.2:32400 rumen@78.83.67.145 -p 2222 -N"
+# Containers
+alias sel-st="sestatus"
+alias sel-enforce-off="sudo setenforce 0"

@@ -12,10 +12,10 @@ function setup_git {
   if [[ ! -f "$(which git)" ]]; then
     echo "git is not found on you system. You have to install it in order to continue?"
     select choice_dependencies in "Yes" "No"; do
-        case $choice_dependencies in
-            Yes ) install_dependencies break;;
-            No ) return;;
-        esac
+      case $choice_dependencies in
+        Yes ) install_dependencies break;;
+        No ) return;;
+      esac
     done
   fi
 
@@ -25,12 +25,12 @@ function setup_git {
   echo -n "> Type in your full name: "
   read -r input_full_name
 
-  echo "Pick your editor?"
+  echo "Pick your editor."
   select editor_choice in "vim" "nano"; do
-      case $editor_choice in
-          vim ) break;;
-          nano ) break;;
-      esac
+    case $editor_choice in
+      vim ) break;;
+      nano ) break;;
+    esac
   done
 
   if [[ -n $input_email ]]; then
@@ -43,10 +43,20 @@ function setup_git {
     git config --global user.name "$input_full_name"
   fi
 
+  echo "out: $editor_choice"
   if [[ -n $editor_choice ]]; then
     git config --global --unset-all core.editor
     git config --global core.editor "$editor_choice"
   fi
+
+  # Configure aliases
+  git config --global alias.p push
+  git config --global alias.b branch
+  git config --global alias.st status
+  git config --global alias.last 'log -1 HEAD --stat'
+  git config --global alias.c commit
+  git config --global alias.gl 'config --global -l'
+  git config --global alias.ch checkout
 
   echo ""
   echo "Your new $path_to_config_file file:"

@@ -27,7 +27,7 @@ function log_subtask() {
 # Usage: log_subtask_success
 # Description: Log subtask that is completed.
 function log_subtask_success() {
-  MSG="${1:""}"
+  MSG=${1:-""}
   echo "$text_indentation$text_indentation✔ Completed * $MSG"
 }
 
@@ -126,7 +126,7 @@ root_dir="$HOME/os-bootstrap"
 echo ""
 echo "******************************************************************************************"
 echo "# OS bootstrap"
-echo "# The script is based on Fedora and using \"dnf\" as a package manager."
+echo "# IMPORTANT: The script is based on Fedora and it is using \"dnf\" as a package manager."
 echo "******************************************************************************************"
 echo ""
 
