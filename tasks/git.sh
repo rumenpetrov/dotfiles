@@ -26,8 +26,9 @@ function setup_git {
   read -r input_full_name
 
   echo "Pick your editor."
-  select editor_choice in "vim" "nano"; do
+  select editor_choice in "vi" "vim" "nano"; do
     case $editor_choice in
+      vi ) break;;
       vim ) break;;
       nano ) break;;
     esac
