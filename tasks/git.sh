@@ -54,6 +54,7 @@ function setup_git {
   git config --global alias.b branch
   git config --global alias.st status
   git config --global alias.last 'log -1 HEAD --stat'
+  git config --global alias.l "log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit"
   git config --global alias.c commit
   git config --global alias.gl 'config --global -l'
   git config --global alias.ch checkout
