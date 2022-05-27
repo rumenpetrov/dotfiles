@@ -150,6 +150,14 @@ select choice_home_files in "Yes" "No"; do
     esac
 done
 
+echo "Do you want to modify GNOME settings?"
+select choice_gnome_settings in "Yes" "No"; do
+    case $choice_gnome_settings in
+        Yes ) break;;
+        No ) break;;
+    esac
+done
+
 echo "Do you want to configure git?"
 select choice_git in "Yes" "No"; do
     case $choice_git in
@@ -176,15 +184,22 @@ if [[ $choice_home_files == "Yes" ]]; then
   echo ""
 fi
 
+if [[ $choice_gnome_settings == "Yes" ]]; then
+  log_task "Update GNOME settings(dconf)."
+  source $root_dir/tasks/update-gnome-settings.sh
+  update_gnome_settings
+  echo ""
+fi
+
 if [[ $choice_git == "Yes" ]]; then
-  log_task "Setup git"
+  log_task "Setup git."
   source $root_dir/tasks/git.sh
   setup_git
   echo ""
 fi
 
 if [[ $choice_wm == "Yes" ]]; then
-  log_task "Setup window manager"
+  log_task "Setup window manager."
   source $root_dir/tasks/window-manager.sh
   setup_WM "$root_dir/files/.config"
   echo ""
