@@ -158,6 +158,14 @@ select choice_gnome_settings in "Yes" "No"; do
     esac
 done
 
+echo "Do you want to reset some common GNOME settings?"
+select choice_gnome_settings_reset in "Yes" "No"; do
+    case $choice_gnome_settings_reset in
+        Yes ) break;;
+        No ) break;;
+    esac
+done
+
 echo "Do you want to configure git?"
 select choice_git in "Yes" "No"; do
     case $choice_git in
@@ -188,6 +196,13 @@ if [[ $choice_gnome_settings == "Yes" ]]; then
   log_task "Update GNOME settings(dconf)."
   source $root_dir/tasks/update-gnome-settings.sh
   update_gnome_settings
+  echo ""
+fi
+
+if [[ $choice_gnome_settings_reset == "Yes" ]]; then
+  log_task "Reset GNOME settings(dconf)."
+  source $root_dir/tasks/reset-some-gnome-settings.sh
+  reset_some_gnome_settings
   echo ""
 fi
 
