@@ -8,6 +8,7 @@ alias sz="du -had 1 | sort -rh"
 alias disks="df -hT"
 alias temp="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'"
 alias livetemp="watch \"paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'\""
+alias weather="curl wttr.in"
 
 #
 # Apps
