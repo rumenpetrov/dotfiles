@@ -2,21 +2,12 @@
 
 # This is part of the main script and it depends on it
 
-function install_dependencies() {
-  sudo dnf install git
-}
-
 function setup_git {
   local path_to_config_file="$HOME/.gitconfig"
 
   if [[ ! -f "$(which git)" ]]; then
-    echo "git is not found on you system. You have to install it in order to continue?"
-    select choice_dependencies in "Yes" "No"; do
-      case $choice_dependencies in
-        Yes ) install_dependencies break;;
-        No ) return;;
-      esac
-    done
+    echo "git is not found on you system. You can't proceed without installing it."
+    exit 1
   fi
 
   echo -n "> Type in your email address (the one used for your GitHub account): "

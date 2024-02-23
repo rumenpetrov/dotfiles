@@ -10,7 +10,7 @@ function setup_WM() {
   local path_to_actual_config_dir="$HOME/.config"
   local path_to_input_config_dir=$1
 
-  echo "The script will install the following packages: "
+  echo "The script requires dnf and will install the following packages: "
   echo "- sway"
   echo "- swayidle"
   echo "- swaylock"
