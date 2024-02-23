@@ -132,14 +132,14 @@ echo "**************************************************************************
 echo ""
 
 echo "Do you want to proceed?"
-select choice_run in "Yes" "No"; do
-    case $choice_run in
+select choice_start in "Yes" "No"; do
+    case $choice_start in
         Yes ) break;;
         No ) exit;;
     esac
 done
 
-if [[ $choice_run == "Yes" ]]; then
+if [[ $choice_start == "Yes" ]]; then
   clear
 fi
 
