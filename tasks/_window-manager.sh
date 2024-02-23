@@ -39,11 +39,11 @@ function setup_WM() {
 
   mkdir -p "$path_to_actual_config_dir/sway/"
   backup "config" "$path_to_actual_config_dir/sway/config"
-  symlink "$path_to_input_config_dir/sway/config" "$path_to_actual_config_dir/sway/config"
+  symlink "config" "$path_to_input_config_dir/sway/config" "$path_to_actual_config_dir/sway/config"
 
   mkdir -p "$path_to_actual_config_dir/waybar/"
   backup "config" "$path_to_actual_config_dir/waybar/config"
-  symlink "$path_to_input_config_dir/waybar/config" "$path_to_actual_config_dir/waybar/config"
+  symlink "config" "$path_to_input_config_dir/waybar/config" "$path_to_actual_config_dir/waybar/config"
   backup "config" "$path_to_actual_config_dir/waybar/style.css"
-  symlink "$path_to_input_config_dir/waybar/style.css" "$path_to_actual_config_dir/waybar/style.css"
+  symlink "style.css" "$path_to_input_config_dir/waybar/style.css" "$path_to_actual_config_dir/waybar/style.css"
 }

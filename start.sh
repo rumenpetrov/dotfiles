@@ -50,7 +50,8 @@ function log_subtask_error() {
 function backup() {
   local file_name=$1
   local path_source=$2
-  local path_destination="$path_source.backup.$(date +%d-%m-%Y--%H-%M-%S)"
+  local path_destination
+  path_destination="$path_source.backup.$(date +%d-%m-%Y--%H-%M-%S)"
 
   log_subtask "Backup file $file_name"
 
@@ -58,20 +59,20 @@ function backup() {
   if [[ -f $path_source ]]; then
       # Is it a symlink?
       if [[ ! -L $path_source ]]; then
-          mv "$path_source" $path_destination
+          mv "$path_source" "$path_destination"
           log_subtask_success "Moved your old $path_source file to $path_destination"
         else
           log_subtask_info "Delete file ${file_name##*/}, because it exists as a symlink in your home directory."
-          rm -rf $path_source
+          rm -rf "$path_source"
       fi
     else
       log_subtask_info "Skipping * There is not file named ${file_name##*/} in the directory. $path_source"
   fi
 }
 
-# Usage: symlink <file_name>
+# Usage: symlink <file_name, path_to_source, path_to_destination>
 # Description: Check if the file exists and replace it with a symlink.
-function symlinkByName() {
+function symlink() {
   local file_name=$1
   local path_source=$2
   local path_destination=$3
@@ -83,36 +84,11 @@ function symlinkByName() {
       # Is it a symlink?
       if [[ ! -L $path_destination ]]; then
           log_subtask_success
-          ln -s $path_source $path_destination
-        else
-          log_subtask_info "Skipping * The file is a symlink!"
-      fi
-    else
-      log_subtask_info "Skipping * The file already exists!"
-  fi
-}
-
-# Usage: symlink <path_to_source, path_to_destination>
-# Description: Check if the file exists and replace it with a symlink.
-function symlink() {
-  local path_source=$1
-  local path_destination=$2
-
-  echo "11 $path_source"
-  echo "22 $path_destination"
-
-  log_subtask "Create symlink"
-
-  # Does the file already exist?
-  if [[ ! -f $path_destination ]]; then
-      # Is it a symlink?
-      if [[ ! -L $path_destination ]]; then
-          log_subtask_success
-          ln -s $path_source $path_destination
+          ln -s "$path_source" "$path_destination"
         else
           log_subtask_info "Rebuild * The file is a symlink!"
-          rm -rf $path_destination
-          ln -s $path_source $path_destination
+          rm -rf "$path_destination"
+          ln -s "$path_source" "$path_destination"
       fi
     else
       log_subtask_info "Skipping * The file already exists!"
@@ -188,36 +164,36 @@ clear
 # Loop through all files in /files folder, backup them if they exist in home directory and symlink the new onces.
 if [[ $choice_home_files == "Yes" ]]; then
   log_task "Backup dot files and replace them with symlinks to the new files."
-  source $root_dir/tasks/_setup-bash.sh
-  setup-bash $root_dir/files/bash
+  source "$root_dir"/tasks/_setup-bash.sh
+  setup-bash "$root_dir"/files/bash
   echo ""
 fi
 
 if [[ $choice_gnome_settings == "Yes" ]]; then
   log_task "Update GNOME settings(dconf)."
-  source $root_dir/tasks/_update-gnome-settings.sh
+  source "$root_dir"/tasks/_update-gnome-settings.sh
   update_gnome_settings
   echo ""
 fi
 
 if [[ $choice_gnome_settings_reset == "Yes" ]]; then
   log_task "Reset GNOME settings(dconf)."
-  source $root_dir/tasks/_reset-some-gnome-settings.sh
+  source "$root_dir"/tasks/_reset-some-gnome-settings.sh
   reset_some_gnome_settings
   echo ""
 fi
 
 if [[ $choice_git == "Yes" ]]; then
   log_task "Setup git."
-  source $root_dir/tasks/_setup-git.sh
+  source "$root_dir"/tasks/_setup-git.sh
   setup_git
   echo ""
 fi
 
 if [[ $choice_wm == "Yes" ]]; then
   log_task "Setup window manager."
-  source $root_dir/tasks/_window-manager.sh
-  setup_WM "$root_dir/files/.config"
+  source "$root_dir"/tasks/_window-manager.sh
+  setup_WM "$root_dir"/files/.config
   echo ""
 fi
 
