@@ -28,8 +28,8 @@ function log_subtask() {
 # Usage: log_subtask_success
 # Description: Log subtask that is completed.
 function log_subtask_success() {
-  MSG=${1:-""}
-  echo "$text_indentation$text_indentation Completed * $MSG"
+  msg=${1:-""}
+  echo "$text_indentation$text_indentation Completed * $msg"
 }
 
 # Usage: log_subtask_info <message>
@@ -188,38 +188,38 @@ clear
 # Loop through all files in /files folder, backup them if they exist in home directory and symlink the new onces.
 if [[ $choice_home_files == "Yes" ]]; then
   log_task "Backup dot files and replace them with symlinks to the new files."
-  source $root_dir/tasks/setup-bash.sh
+  source $root_dir/tasks/_setup-bash.sh
   setup-bash $root_dir/files/bash
   echo ""
 fi
 
 if [[ $choice_gnome_settings == "Yes" ]]; then
   log_task "Update GNOME settings(dconf)."
-  source $root_dir/tasks/update-gnome-settings.sh
+  source $root_dir/tasks/_update-gnome-settings.sh
   update_gnome_settings
   echo ""
 fi
 
 if [[ $choice_gnome_settings_reset == "Yes" ]]; then
   log_task "Reset GNOME settings(dconf)."
-  source $root_dir/tasks/reset-some-gnome-settings.sh
+  source $root_dir/tasks/_reset-some-gnome-settings.sh
   reset_some_gnome_settings
   echo ""
 fi
 
 if [[ $choice_git == "Yes" ]]; then
   log_task "Setup git."
-  source $root_dir/tasks/git.sh
+  source $root_dir/tasks/_setup-git.sh
   setup_git
   echo ""
 fi
 
 if [[ $choice_wm == "Yes" ]]; then
   log_task "Setup window manager."
-  source $root_dir/tasks/window-manager.sh
+  source $root_dir/tasks/_window-manager.sh
   setup_WM "$root_dir/files/.config"
   echo ""
 fi
 
-echo "Awesome, all set."
+echo "👌 Awesome, all set."
 echo ""
