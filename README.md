@@ -9,7 +9,7 @@ My dot files and OS bootstrap automation scripts.
 
 ```sh
 $ cd dotfiles/
-$ chmod +x start.sh
+$ chmod u+x start.sh
 $ ./start.sh
 ```
 

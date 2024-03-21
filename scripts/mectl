@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+#
+# THIS IS WIP
+# Move me to "$HOME/.local/bin/" to make me executable from everywhere
+#
+
+echo "Hello from mectl!"
+
+echo "Script executed from: ${PWD}"
+
+BASEDIR=$(dirname $0)
+echo "Script location: ${BASEDIR}"

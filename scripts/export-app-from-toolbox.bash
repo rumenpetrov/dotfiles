@@ -42,5 +42,5 @@ fi
 toolbox run --container "$toolbox_name" cp "/usr/share/applications/$desktop_file_name" "$HOME/.local/share/applications/$desktop_file_name"
 
 echo -e "Done."
-echo -e "Make sure you update the exec command."
+echo -e "Make sure you update the exec command of the new created '*.desktop' file."
 echo -e "E.g. 'toolbox run --container system-f39 /opt/sublime_text/sublime_text %F'"

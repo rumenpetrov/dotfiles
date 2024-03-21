@@ -159,41 +159,56 @@ select choice_wm in "Yes" "No"; do
     esac
 done
 
+echo "Do you want to install just?"
+select choice_just in "Yes" "No"; do
+    case $choice_just in
+        Yes ) break;;
+        No ) break;;
+    esac
+done
+
 clear
 
 # Loop through all files in /files folder, backup them if they exist in home directory and symlink the new onces.
 if [[ $choice_home_files == "Yes" ]]; then
   log_task "Backup dot files and replace them with symlinks to the new files."
-  source "$root_dir"/tasks/_setup-bash.sh
+  source "$root_dir"/tasks/_setup_bash.sh
   setup-bash "$root_dir"/files/bash
   echo ""
 fi
 
 if [[ $choice_gnome_settings == "Yes" ]]; then
   log_task "Update GNOME settings(dconf)."
-  source "$root_dir"/tasks/_update-gnome-settings.sh
+  source "$root_dir"/tasks/_update_gnome_settings.sh
   update_gnome_settings
   echo ""
 fi
 
 if [[ $choice_gnome_settings_reset == "Yes" ]]; then
   log_task "Reset GNOME settings(dconf)."
-  source "$root_dir"/tasks/_reset-some-gnome-settings.sh
+  source "$root_dir"/tasks/_reset_some_gnome_settings.sh
   reset_some_gnome_settings
   echo ""
 fi
 
 if [[ $choice_git == "Yes" ]]; then
   log_task "Setup git."
-  source "$root_dir"/tasks/_setup-git.sh
+  source "$root_dir"/tasks/_setup_git.sh
   setup_git
   echo ""
 fi
 
 if [[ $choice_wm == "Yes" ]]; then
   log_task "Setup window manager."
-  source "$root_dir"/tasks/_window-manager.sh
+  source "$root_dir"/tasks/_window_manager.sh
   setup_WM "$root_dir"/files/.config
+  echo ""
+fi
+
+if [[ $choice_just == "Yes" ]]; then
+  log_task "Installing just."
+  source "$root_dir"/tasks/_install_just.sh
+  install_just
   echo ""
 fi
 
