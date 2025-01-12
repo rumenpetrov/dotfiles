@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # exit when a command fails
-set -o errexit
+# set -o errexit
 
 # exit when undeclared variable is used
 # set -o nounset
+
 # trace what gets executed
 # set -o xtrace
 
