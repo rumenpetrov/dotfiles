@@ -6,4 +6,5 @@ function reset_some_gnome_settings {
   gsettings reset org.gnome.mutter.keybindings toggle-tiled-left
   gsettings reset org.gnome.mutter.keybindings toggle-tiled-right
   gsettings reset org.gnome.desktop.wm.keybindings maximize
+  gsettings reset org.gnome.desktop.wm.preferences button-layout
 }
