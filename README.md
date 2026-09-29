@@ -1,11 +1,13 @@
 # dotfiles
+
 My dot files and OS bootstrap automation scripts.
 
 ### Setup
-* Clone the repository in your "Home" directory.
-* Navigate to the "dotfiles/" folder.
-* Make sure the script have sufficient permissions.
-* Run the "start" script which is a wizard and combines all the defined tasks.
+
+- Clone the repository in your "Home" directory.
+- Navigate to the "dotfiles/" folder.
+- Make sure the script have sufficient permissions.
+- Run the "start" script which is a wizard and combines all the defined tasks.
 
 ```sh
 $ cd dotfiles/
@@ -22,7 +24,8 @@ $ ./start.sh
 ```
 
 #### Tasks
-* Backup dot files and replace them with symlinks to the custom files.
-* Updates GNOME settings(dconf).
-* Configures git.
-* Setup tiling window manager (Sway).
+
+- Customize dot files with the configuration from the `files/bash/` folder.
+- Updates GNOME settings(dconf).
+- Configures git.
+- Setup tiling window manager (Sway).

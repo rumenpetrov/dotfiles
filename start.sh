@@ -170,9 +170,9 @@ done
 
 clear
 
-# Loop through all files in /files folder, backup them if they exist in home directory and symlink the new onces.
+# Explicitly customize the files located in the /files folder.
 if [[ $choice_home_files == "Yes" ]]; then
-  log_task "Backup dot files and replace them with symlinks to the new files."
+  log_task "Customize dot files."
   source "$root_dir"/tasks/_setup_bash.sh
   setup-bash "$root_dir"/files/bash
   echo ""
